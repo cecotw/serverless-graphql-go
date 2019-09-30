@@ -1,7 +1,12 @@
 package graphql
 
-import "fmt"
+import (
+	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/cecotw/serverless-graphql-go/internal/pkg/handler"
+)
+
+var graphql = new(handler.GraphQl)
 
 func main() {
-	fmt.Println("Hello World")
+	lambda.Start(graphql.Lambda)
 }
