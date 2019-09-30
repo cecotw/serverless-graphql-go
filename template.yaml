@@ -1,0 +1,35 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  LocalApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: local
+      Cors:
+        AllowHeaders: "'Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization'"
+        AllowOrigin: "'*'"
+        AllowMethods: "'POST, GET, OPTIONS'"
+
+GraphqlFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: ./cmd/graphql/main
+      Runtime: go1.x
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref LocalApi
+            Path: /query
+            Method: post
+            Environment:
+              Variables:
+                DATABASE_USERNAME: postgres
+                DATABASE_PASSWORD: postgres
+                DATABASE_HOST: host.docker.internal
+                DATABASE_PORT: 5432
+                DATABASE: serverlessgraphqlgo
+                SSL_MODE: disable
