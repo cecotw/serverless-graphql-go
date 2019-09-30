@@ -1,10 +1,15 @@
-import "github.com/cecotw/serverless-graphql-go/internal/app/graphql/todo"
+package schema
+
+import (
+	"github.com/cecotw/serverless-graphql-go/internal/app/graphql/todo"
+)
 
 // QueryResolver : Query Resolver
 type QueryResolver struct {
 	*todo.Resolver
 }
 
+// Schema Schema
 var Schema = `
 schema {
   query: Query
