@@ -13,7 +13,7 @@ Resources:
         AllowOrigin: "'*'"
         AllowMethods: "'POST, GET, OPTIONS'"
 
-GraphqlFunction:
+  GraphqlFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: ./cmd/graphql/main
